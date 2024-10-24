@@ -7,14 +7,17 @@
 size = Vector2(127, 127)
 
 [node name="Damage Obstacle" type="Node2D"]
+position = Vector2(-126, 72)
 
 [node name="Area2D" type="Area2D" parent="."]
 script = ExtResource("1_km2jj")
 
 [node name="Icon" type="Sprite2D" parent="Area2D"]
-position = Vector2(177, 359)
+position = Vector2(481, -69)
 texture = ExtResource("2_1r5fj")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-position = Vector2(177, 359)
+position = Vector2(477, -71)
 shape = SubResource("RectangleShape2D_igsmb")
+
+[node name="Camera2D" type="Camera2D" parent="."]
