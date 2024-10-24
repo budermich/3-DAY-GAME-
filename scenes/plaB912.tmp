@@ -8,15 +8,12 @@ size = Vector2(64, 64)
 [node name="Player" type="Node2D"]
 scale = Vector2(0.8, 0.8)
 script = ExtResource("1_7nuys")
-initScale = Vector2(0.8, 0.8)
 
 [node name="Polygon2D" type="Polygon2D" parent="."]
-color = Color(0, 0.69, 0.988, 1)
+color = Color(0, 0.690196, 0.988235, 1)
 polygon = PackedVector2Array(-32, 32, -32, -32, 32, -32, 32, 32)
 
 [node name="Collision" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Collision"]
 shape = SubResource("RectangleShape2D_rnraf")
-
-[connection signal="area_entered" from="Collision" to="." method="_on_collision_area_entered"]

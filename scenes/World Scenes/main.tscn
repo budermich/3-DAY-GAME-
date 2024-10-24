@@ -1,42 +1,61 @@
+[gd_scene load_steps=6 format=3 uid="uid://bmalrlk4nndy0"]
 
-[ext_resource type="PackedScene" uid="uid://ce5vdptnvr83l" path="res://scenes/player.tscn" id="1_reqnv"]
-[gd_scene load_steps=4 format=3 uid="uid://8u1h4c47g3ei"]
+[ext_resource type="PackedScene" uid="uid://ce5vdptnvr83l" path="res://scenes/player.tscn" id="2_7i0ox"]
+[ext_resource type="Texture2D" uid="uid://cus836qjldeiq" path="res://art/bg.png" id="3_xhc24"]
 
-[sub_resource type="Environment" id="Environment_gjt44"]
+[sub_resource type="Environment" id="Environment_2n7fq"]
 background_mode = 3
-tonemap_mode = 1
+tonemap_mode = 2
 glow_enabled = true
-glow_levels/1 = 0.2
-glow_levels/2 = 0.1
-glow_levels/4 = 0.3
+glow_levels/1 = 16.0
+glow_levels/2 = 0.2
+glow_levels/3 = 0.0
+glow_levels/5 = 0.0
 glow_intensity = 0.3
+glow_strength = 0.8
 glow_blend_mode = 1
-glow_hdr_threshold = 0.67
-glow_hdr_scale = 1.04
-glow_hdr_luminance_cap = 2.0
+glow_hdr_threshold = 0.0
 adjustment_enabled = true
-adjustment_contrast = 1.85
-adjustment_saturation = 0.75
 
-[sub_resource type="CameraAttributesPractical" id="CameraAttributesPractical_e2lrh"]
+[sub_resource type="CameraAttributesPractical" id="CameraAttributesPractical_ubnco"]
 
-[sub_resource type="Compositor" id="Compositor_pvec7"]
+[sub_resource type="Compositor" id="Compositor_bpim4"]
 
-[node name="Node2D" type="Node2D"]
+[node name="Main" type="Node2D"]
 
-[node name="Player" parent="." instance=ExtResource("1_reqnv")]
+[node name="Player" parent="." instance=ExtResource("2_7i0ox")]
+z_index = 5
+
+[node name="Setup" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_2n7fq")
+camera_attributes = SubResource("CameraAttributesPractical_ubnco")
+compositor = SubResource("Compositor_bpim4")
+
+[node name="Road" type="Node2D" parent="."]
+
+[node name="Polygon2D" type="Polygon2D" parent="Road"]
+position = Vector2(-2, 372)
+scale = Vector2(1, 11.6406)
+color = Color(1, 0, 0.690196, 0.384314)
+polygon = PackedVector2Array(-32, -64, -32, 0, -26, 0, -26, -64)
+
+[node name="Polygon2D3" type="Polygon2D" parent="Road"]
+z_index = -1
+position = Vector2(0, -27.8508)
+scale = Vector2(1, 1.00817)
+color = Color(1, 0.313726, 1, 0.415686)
+polygon = PackedVector2Array(-28, -339.375, 28, -339.375, 28, 394.625, -0.466888, 394.625, -28, 394.625)
+
+[node name="Polygon2D2" type="Polygon2D" parent="Road"]
+position = Vector2(60, 372)
+scale = Vector2(1, 11.6406)
+color = Color(1, 0, 0.690196, 0.384314)
+polygon = PackedVector2Array(-32, -64, -32, 0, -26, 0, -26, -64)
+
+[node name="Background" type="Sprite2D" parent="."]
+z_index = -5
+position = Vector2(0, 1.49999)
+scale = Vector2(1, 1.01528)
+texture = ExtResource("3_xhc24")
 
 [node name="Camera2D" type="Camera2D" parent="."]
-
-[node name="ColorRect" type="ColorRect" parent="."]
-z_index = -13
-offset_left = -650.0
-offset_top = -371.0
-offset_right = 639.0
-offset_bottom = 366.0
-color = Color(0.0313726, 0.152941, 0.317647, 1)
-
-[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
-environment = SubResource("Environment_gjt44")
-camera_attributes = SubResource("CameraAttributesPractical_e2lrh")
-compositor = SubResource("Compositor_pvec7")
