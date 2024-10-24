@@ -30,8 +30,8 @@ func _input(event: InputEvent) -> void:
 var moving=false
 func Move(where): #Guaranteed consistent movement that calls the animation functions(DEPENDS ON SPEED, Small speed=fast, Big speed=slow
 	moving=true
-	AnimateX()
-	AnimateY()
+	AnimateX(get_process_delta_time())
+	AnimateY(get_process_delta_time())
 	await get_tree().create_timer(0.01).timeout
 	while(abs(wantedPosition-position.y)>1):
 		await get_tree().create_timer(0.01).timeout
@@ -42,21 +42,21 @@ func Move(where): #Guaranteed consistent movement that calls the animation funct
 
 @export var initScale:Vector2
 #The x scaling changes when u move
-func AnimateX():
+func AnimateX(delta):
 	while(scale.x>0.4 and moving):
-		scale.x-=0.02
+		scale.x-=4*delta
 		await get_tree().create_timer(0.001).timeout
 	while(scale.x<0.8 and moving):
-		scale.x+=0.02
+		scale.x+=4*delta
 		await get_tree().create_timer(0.001).timeout
 
 #The y scaling changes when u move
-func AnimateY():
+func AnimateY(delta):
 	while(scale.y<1.2 and moving):
-		scale.y+=0.02
+		scale.y+=4*delta
 		await get_tree().create_timer(0.001).timeout
 	while(scale.y>0.8 and moving):
-		scale.y-=0.02
+		scale.y-=4*delta
 		await get_tree().create_timer(0.001).timeout
 
 #i need to work with you here, i need types of blocks.
