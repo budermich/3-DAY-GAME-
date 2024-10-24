@@ -34,21 +34,21 @@ compositor = SubResource("Compositor_bpim4")
 [node name="Road" type="Node2D" parent="."]
 
 [node name="Polygon2D" type="Polygon2D" parent="Road"]
-position = Vector2(-2, 372)
-scale = Vector2(1, 11.6406)
+position = Vector2(-2, 379)
+scale = Vector2(1, 11.75)
 color = Color(1, 0, 0.690196, 0.384314)
 polygon = PackedVector2Array(-32, -64, -32, 0, -26, 0, -26, -64)
 
 [node name="Polygon2D3" type="Polygon2D" parent="Road"]
 z_index = -1
-position = Vector2(0, -27.8508)
-scale = Vector2(1, 1.00817)
+position = Vector2(0, -25.539)
+scale = Vector2(1, 1.01499)
 color = Color(1, 0.313726, 1, 0.415686)
 polygon = PackedVector2Array(-28, -339.375, 28, -339.375, 28, 394.625, -0.466888, 394.625, -28, 394.625)
 
 [node name="Polygon2D2" type="Polygon2D" parent="Road"]
-position = Vector2(60, 372)
-scale = Vector2(1, 11.6406)
+position = Vector2(60, 379)
+scale = Vector2(1, 11.75)
 color = Color(1, 0, 0.690196, 0.384314)
 polygon = PackedVector2Array(-32, -64, -32, 0, -26, 0, -26, -64)
 

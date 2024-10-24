@@ -1,0 +1,44 @@
+[gd_scene load_steps=5 format=3 uid="uid://c1cp7dxf1ka2c"]
+
+[ext_resource type="Script" path="res://scripts/particles.gd" id="1_dhx2s"]
+
+[sub_resource type="Gradient" id="Gradient_27gr1"]
+interpolation_color_space = 2
+colors = PackedColorArray(0.384314, 0.894118, 1, 0.752941, 0.839216, 0.839216, 0.839216, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_l15sp"]
+gradient = SubResource("Gradient_27gr1")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_2u7pn"]
+particle_flag_align_y = true
+particle_flag_disable_z = true
+angle_min = -232.3
+angle_max = 216.8
+direction = Vector3(0, 1, 0)
+spread = 25.0
+initial_velocity_min = 40.0
+initial_velocity_max = 80.0
+angular_velocity_min = -1.60933e-05
+angular_velocity_max = -1.60933e-05
+gravity = Vector3(0, 98.305, 0)
+linear_accel_min = -2.23517e-06
+linear_accel_max = -2.23517e-06
+tangential_accel_min = -2.23517e-06
+tangential_accel_max = -2.23517e-06
+scale_max = 4.0
+color = Color(0.384314, 0.894118, 1, 0.752941)
+color_ramp = SubResource("GradientTexture1D_l15sp")
+hue_variation_min = -2.23517e-08
+hue_variation_max = 0.03
+
+[node name="GPUParticles2D" type="GPUParticles2D"]
+z_index = -1
+emitting = false
+amount = 15
+process_material = SubResource("ParticleProcessMaterial_2u7pn")
+one_shot = true
+explosiveness = 1.0
+randomness = 0.48
+script = ExtResource("1_dhx2s")
+
+[connection signal="finished" from="." to="." method="_on_finished"]

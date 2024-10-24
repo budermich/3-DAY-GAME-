@@ -4,15 +4,26 @@ var health=3
 var speed=20
 var wantedPosition=position.y
 var initPos=0
+@onready var particles = preload("res://particle.tscn")
+
 func _input(event: InputEvent) -> void:
 	if Input.is_action_just_pressed("down") and !moving:
+		var particleInstance=particles.instantiate()
 		wantedPosition=clamp(position.y+32,-320,320)
 		initPos=position.y
+		particleInstance.get_process_material().gravity.y=-abs(particleInstance.get_process_material().gravity.y)
+		particleInstance.scale.y=-1
+		particleInstance.emitting=true
+		add_child(particleInstance)
 		if(wantedPosition>=position.y+32):
 			Move(-1)
 	if Input.is_action_just_pressed("Up") and !moving:
+		var particleInstance=particles.instantiate()
 		wantedPosition=clamp(position.y-32,-320,320)
 		initPos=position.y
+		particleInstance.get_process_material().gravity.y=abs(particleInstance.get_process_material().gravity.y)
+		particleInstance.emitting=true
+		add_child(particleInstance)
 		if(wantedPosition<=position.y-32):
 			Move(1)
 

@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://47dgfcaobchm"]
 
-[ext_resource type="Script" path="res://scenes/Obstacles/area_2d.gd" id="1_km2jj"]
+[ext_resource type="Script" path="res://scripts/area_2d.gd" id="1_km2jj"]
 [ext_resource type="Texture2D" uid="uid://bhcasxbk562mu" path="res://icon.svg" id="2_1r5fj"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_igsmb"]
