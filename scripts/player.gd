@@ -6,10 +6,6 @@ var wantedPosition=position.y
 var initPos=0
 @onready var particles = preload("res://particle.tscn")
 
-func _ready() -> void:
-	AnimateScore()
-	
-
 func _input(event: InputEvent) -> void:
 	if Input.is_action_just_pressed("down") and !moving:
 		var particleInstance=particles.instantiate()
@@ -63,18 +59,25 @@ func AnimateY(delta):
 		scale.y-=4*delta
 		await get_tree().create_timer(0.001).timeout
 
+@onready var score_counter: RichTextLabel = $"../Score Counter"
+@onready var damage_sound: AudioStreamPlayer2D = $DamageSound
+@onready var score_sound: AudioStreamPlayer2D = $ScoreSound
+
 #i need to work with you here, i need types of blocks.
 func _on_collision_area_entered(area: Area2D) -> void:
 	if(area.get_parent().type=="Deadly"):
 		hp-=1
 		damageTaken=false
 		AnimateDamage()
+		damage_sound.play()
 		if(hp<=0):
 			YouLose()
 	elif(area.get_parent().type=="Score"):
 		Global.score+=1
+		score_counter.text="Score: " + Global.score
 		scoreGotten=false
 		AnimateScore()
+		score_sound.play()
 
 var damageTaken=false
 func AnimateDamage():

@@ -1,6 +1,7 @@
-[gd_scene load_steps=3 format=3 uid="uid://ce5vdptnvr83l"]
+[gd_scene load_steps=4 format=3 uid="uid://ce5vdptnvr83l"]
 
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_7nuys"]
+[ext_resource type="AudioStream" uid="uid://c8ol2mnm0w0ym" path="res://music/Sound Effects/Damage Sfx.mp3" id="2_mger3"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_rnraf"]
 size = Vector2(64, 64)
@@ -18,5 +19,15 @@ polygon = PackedVector2Array(-32, 32, -32, -32, 32, -32, 32, 32)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Collision"]
 shape = SubResource("RectangleShape2D_rnraf")
+
+[node name="DamageSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("2_mger3")
+volume_db = 8.432
+pitch_scale = 2.55
+
+[node name="ScoreSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("2_mger3")
+volume_db = 10.0
+pitch_scale = 5.0
 
 [connection signal="area_entered" from="Collision" to="." method="_on_collision_area_entered"]

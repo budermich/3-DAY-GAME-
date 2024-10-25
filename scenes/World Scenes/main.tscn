@@ -1,6 +1,7 @@
-[gd_scene load_steps=6 format=3 uid="uid://bmalrlk4nndy0"]
+[gd_scene load_steps=7 format=3 uid="uid://bmalrlk4nndy0"]
 
 [ext_resource type="PackedScene" uid="uid://ce5vdptnvr83l" path="res://scenes/player.tscn" id="2_7i0ox"]
+[ext_resource type="AudioStream" uid="uid://cp8lx5jqmcpsu" path="res://music/bg music.mp3" id="3_8avec"]
 [ext_resource type="Texture2D" uid="uid://cus836qjldeiq" path="res://art/bg.png" id="3_xhc24"]
 
 [sub_resource type="Environment" id="Environment_2n7fq"]
@@ -61,3 +62,16 @@ scale = Vector2(1, 1.01528)
 texture = ExtResource("3_xhc24")
 
 [node name="Camera2D" type="Camera2D" parent="."]
+
+[node name="Bg music" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_8avec")
+autoplay = true
+parameters/looping = true
+
+[node name="Score Counter" type="RichTextLabel" parent="."]
+offset_left = -624.0
+offset_top = -353.0
+offset_right = -466.0
+offset_bottom = -328.0
+scale = Vector2(1.5, 1.5)
+text = "Score:"
