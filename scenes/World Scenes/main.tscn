@@ -1,7 +1,40 @@
-[gd_scene load_steps=6 format=3 uid="uid://bmalrlk4nndy0"]
+[gd_scene load_steps=7 format=3 uid="uid://bmalrlk4nndy0"]
 
 [ext_resource type="PackedScene" uid="uid://ce5vdptnvr83l" path="res://scenes/player.tscn" id="2_7i0ox"]
 [ext_resource type="Texture2D" uid="uid://cus836qjldeiq" path="res://art/bg.png" id="3_xhc24"]
+
+[sub_resource type="GDScript" id="GDScript_4j4bk"]
+script/source = "extends Node2D
+
+var obstacle =  preload(\"res://scenes/Obstacles/DamageObstacle.tscn\")
+var obstacleInstance = obstacle.instantiate()
+var obstacleInstance2 = obstacle.instantiate()
+
+
+# Called when the node enters the scene tree for the first time.
+func _ready():
+	var i = 0
+	var Yrange = 0
+	while i<4:
+		Yrange = randi_range(0,600)
+		obstacleInstance.position = Vector2(1000,Yrange)
+		add_child(obstacleInstance)
+		#obstacleInstance2.position = Vector2(1000,Yrange)
+		#add_child(obstacleInstance2) 
+		i += 1
+		print(i)
+		print(Yrange)
+
+	
+	pass # Replace with function body.
+
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(delta):
+	if Global.dissapear == true:
+		remove_child(obstacleInstance)
+	pass
+"
 
 [sub_resource type="Environment" id="Environment_2n7fq"]
 background_mode = 3
@@ -22,6 +55,7 @@ adjustment_enabled = true
 [sub_resource type="Compositor" id="Compositor_bpim4"]
 
 [node name="Main" type="Node2D"]
+script = SubResource("GDScript_4j4bk")
 
 [node name="Player" parent="." instance=ExtResource("2_7i0ox")]
 z_index = 5

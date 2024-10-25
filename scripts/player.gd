@@ -61,4 +61,6 @@ func AnimateY(delta):
 
 #i need to work with you here, i need types of blocks.
 func _on_collision_area_entered(area: Area2D) -> void:
+	Global.dissapear=true
+
 	pass
