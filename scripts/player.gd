@@ -65,19 +65,20 @@ func AnimateY(delta):
 
 #i need to work with you here, i need types of blocks.
 func _on_collision_area_entered(area: Area2D) -> void:
-	if(area.get_parent().type=="Deadly"):
+	if(area.type=="Deadly"):
 		hp-=1
 		damageTaken=false
 		AnimateDamage()
 		damage_sound.play()
 		if(hp<=0):
 			YouLose()
-	elif(area.get_parent().type=="Score"):
+	elif(area.type=="Score"):
 		Global.score+=1
-		score_counter.text="Score: " + Global.score
+		score_counter.text="Score: " + str(Global.score)
 		scoreGotten=false
 		AnimateScore()
 		score_sound.play()
+	area.get_parent().queue_free()
 
 var damageTaken=false
 func AnimateDamage():
