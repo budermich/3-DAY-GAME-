@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://bmalrlk4nndy0"]
+[gd_scene load_steps=8 format=3 uid="uid://bmalrlk4nndy0"]
 
 [ext_resource type="PackedScene" uid="uid://ce5vdptnvr83l" path="res://scenes/player.tscn" id="2_7i0ox"]
 [ext_resource type="AudioStream" uid="uid://cp8lx5jqmcpsu" path="res://music/bg music.mp3" id="3_8avec"]
@@ -17,25 +17,11 @@ func _ready():
 	var i = 0
 	while i < 4:
 		var obstacleInstance = obstacle.instantiate()  # Create a new instance for each iteration
-		var Yrange = randi_range(0, 300)
-		
+		var Yrange = randi_range(-300, 300)
 		obstacleInstance.position = Vector2(1000, Yrange)
 		add_child(obstacleInstance)  # Add the new obstacle instance to the scene
 		obstacleInstances.append(obstacleInstance)
-		
 		i += 1
-
-	
-	pass # Replace with function body.
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-	if Global.dissapear == true:
-		if obstacleInstances.size() > 0:
-			var obstacleRemove = obstacleInstances.pop_back()  # Remove the last obstacle in the list
-			remove_child(obstacleRemove)  # Remove it from the scene
-			obstacleRemove.queue_free()  # Free the memory
 "
 
 [sub_resource type="Environment" id="Environment_2n7fq"]
@@ -46,13 +32,13 @@ glow_levels/1 = 16.0
 glow_levels/2 = 0.2
 glow_levels/3 = 0.0
 glow_levels/5 = 0.0
-glow_intensity = 0.4
+glow_intensity = 0.2
 glow_strength = 0.8
 glow_blend_mode = 1
 glow_hdr_threshold = 0.0
 adjustment_enabled = true
 adjustment_contrast = 1.08
-adjustment_saturation = 1.08
+adjustment_saturation = 1.16
 
 [sub_resource type="CameraAttributesPractical" id="CameraAttributesPractical_ubnco"]
 
