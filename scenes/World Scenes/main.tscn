@@ -4,6 +4,40 @@
 [ext_resource type="AudioStream" uid="uid://cp8lx5jqmcpsu" path="res://music/bg music.mp3" id="3_8avec"]
 [ext_resource type="Texture2D" uid="uid://cus836qjldeiq" path="res://art/bg.png" id="3_xhc24"]
 
+[sub_resource type="GDScript" id="GDScript_4j4bk"]
+script/source = "extends Node2D
+
+var obstacle =  preload(\"res://scenes/Obstacles/DamageObstacle.tscn\")
+var obstacleInstance2 = obstacle.instantiate()
+var obstacleInstances = []
+
+
+# Called when the node enters the scene tree for the first time.
+func _ready():
+	var i = 0
+	while i < 4:
+		var obstacleInstance = obstacle.instantiate()  # Create a new instance for each iteration
+		var Yrange = randi_range(0, 300)
+		
+		obstacleInstance.position = Vector2(1000, Yrange)
+		add_child(obstacleInstance)  # Add the new obstacle instance to the scene
+		obstacleInstances.append(obstacleInstance)
+		
+		i += 1
+
+	
+	pass # Replace with function body.
+
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(delta):
+	if Global.dissapear == true:
+		if obstacleInstances.size() > 0:
+			var obstacleRemove = obstacleInstances.pop_back()  # Remove the last obstacle in the list
+			remove_child(obstacleRemove)  # Remove it from the scene
+			obstacleRemove.queue_free()  # Free the memory
+"
+
 [sub_resource type="Environment" id="Environment_2n7fq"]
 background_mode = 3
 tonemap_mode = 2
@@ -25,6 +59,7 @@ adjustment_saturation = 1.08
 [sub_resource type="Compositor" id="Compositor_bpim4"]
 
 [node name="Main" type="Node2D"]
+script = SubResource("GDScript_4j4bk")
 
 [node name="Player" parent="." instance=ExtResource("2_7i0ox")]
 z_index = 5
