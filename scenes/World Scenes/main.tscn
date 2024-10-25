@@ -11,11 +11,13 @@ glow_levels/1 = 16.0
 glow_levels/2 = 0.2
 glow_levels/3 = 0.0
 glow_levels/5 = 0.0
-glow_intensity = 0.3
+glow_intensity = 0.4
 glow_strength = 0.8
 glow_blend_mode = 1
 glow_hdr_threshold = 0.0
 adjustment_enabled = true
+adjustment_contrast = 1.08
+adjustment_saturation = 1.08
 
 [sub_resource type="CameraAttributesPractical" id="CameraAttributesPractical_ubnco"]
 

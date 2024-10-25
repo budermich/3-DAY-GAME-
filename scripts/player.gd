@@ -1,10 +1,14 @@
 extends Node2D
 
-var health=3
+var hp=3
 var speed=20
 var wantedPosition=position.y
 var initPos=0
 @onready var particles = preload("res://particle.tscn")
+
+func _ready() -> void:
+	AnimateScore()
+	
 
 func _input(event: InputEvent) -> void:
 	if Input.is_action_just_pressed("down") and !moving:
@@ -61,4 +65,38 @@ func AnimateY(delta):
 
 #i need to work with you here, i need types of blocks.
 func _on_collision_area_entered(area: Area2D) -> void:
+	if(area.get_parent().type=="Deadly"):
+		hp-=1
+		damageTaken=false
+		AnimateDamage()
+		if(hp<=0):
+			YouLose()
+	elif(area.get_parent().type=="Score"):
+		Global.score+=1
+		scoreGotten=false
+		AnimateScore()
+
+var damageTaken=false
+func AnimateDamage():
+	damageTaken=true
+	while(damageTaken and modulate.g>0):
+		modulate.g-=20.0/255.0
+		await get_tree().create_timer(0.01).timeout
+	while(damageTaken and modulate.g<1):
+		modulate.g+=20.0/255.0
+		await get_tree().create_timer(0.01).timeout
+
+var scoreGotten=false
+func AnimateScore():
+	scoreGotten=true
+	while(scoreGotten and modulate.b>0):
+		modulate.b-=20.0/255.0
+		modulate.r-=20.0/255.0
+		await get_tree().create_timer(0.01).timeout
+	while(scoreGotten and modulate.b<1):
+		modulate.b+=20.0/255.0
+		modulate.r+=20.0/255.0
+		await get_tree().create_timer(0.01).timeout
+
+func YouLose():
 	pass
