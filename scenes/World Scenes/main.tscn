@@ -15,10 +15,11 @@ var obstacleInstances = []
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	var i = 0
-	while i < 4:
+	while i < 16:
 		var obstacleInstance = obstacle.instantiate()  # Create a new instance for each iteration
 		var Yrange = randi_range(-300, 300)
-		obstacleInstance.position = Vector2(1000, Yrange)
+		var Xrange = randi_range(800,1500)
+		obstacleInstance.position = Vector2(Xrange, Yrange)
 		add_child(obstacleInstance)  # Add the new obstacle instance to the scene
 		obstacleInstances.append(obstacleInstance)
 		i += 1
