@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://c3ssjpouw4i4o"
+path="res://.godot/imported/Speed.mp3-42226f3ebb58657070a19cacde08f1df.mp3str"
+
+[deps]
+
+source_file="res://music/Sound Effects/Speed.mp3"
+dest_files=["res://.godot/imported/Speed.mp3-42226f3ebb58657070a19cacde08f1df.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

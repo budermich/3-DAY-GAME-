@@ -1,0 +1,99 @@
+[gd_scene load_steps=15 format=3 uid="uid://cjx7vgw2j82oe"]
+
+[ext_resource type="Script" path="res://scriptsmain_menu.gd" id="1_d8gnn"]
+[ext_resource type="Texture2D" uid="uid://wa1kpatyr8ti" path="res://art/Buttons/play1.png" id="2_iv4k6"]
+[ext_resource type="Texture2D" uid="uid://do0ryasi10f3e" path="res://art/sprite.png" id="2_jkjwb"]
+[ext_resource type="Texture2D" uid="uid://csmc53280iy0s" path="res://art/Buttons/play2.png" id="3_kxv3f"]
+[ext_resource type="Texture2D" uid="uid://cphc25jakidfu" path="res://art/Buttons/play3.png" id="4_v2du1"]
+[ext_resource type="Texture2D" uid="uid://c48tkdpchxily" path="res://art/Buttons/quit1.png" id="5_mx2ml"]
+[ext_resource type="Texture2D" uid="uid://cus836qjldeiq" path="res://art/bg.png" id="5_ujgj4"]
+[ext_resource type="Texture2D" uid="uid://cqkrxsfjmsdq8" path="res://art/Buttons/quit3.png" id="6_dt35o"]
+[ext_resource type="Texture2D" uid="uid://xta8rwfcf86p" path="res://art/Buttons/quit2.png" id="7_dctlt"]
+
+[sub_resource type="Gradient" id="Gradient_vh7a5"]
+interpolation_mode = 2
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_jpnj7"]
+gradient = SubResource("Gradient_vh7a5")
+
+[sub_resource type="Environment" id="Environment_ypu6c"]
+background_mode = 3
+tonemap_mode = 2
+glow_levels/1 = 16.0
+glow_levels/2 = 0.2
+glow_levels/3 = 0.0
+glow_levels/5 = 0.0
+glow_intensity = 8.0
+glow_strength = 0.8
+glow_blend_mode = 1
+glow_hdr_threshold = 0.6
+adjustment_enabled = true
+adjustment_contrast = 1.08
+adjustment_saturation = 1.16
+
+[sub_resource type="CameraAttributesPractical" id="CameraAttributesPractical_qkcqr"]
+
+[sub_resource type="Compositor" id="Compositor_pnps1"]
+
+[node name="MainMenu" type="Node2D"]
+texture_filter = 1
+script = ExtResource("1_d8gnn")
+
+[node name="SQUARZ" type="Sprite2D" parent="."]
+texture_filter = 1
+position = Vector2(0, -185.447)
+scale = Vector2(0.6, 0.615473)
+texture = ExtResource("2_jkjwb")
+
+[node name="Background" type="Sprite2D" parent="."]
+z_index = -5
+position = Vector2(0, 1.49999)
+scale = Vector2(1, 1.01528)
+texture = ExtResource("5_ujgj4")
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+position = Vector2(609, 2)
+scale = Vector2(1, 11.4063)
+texture = SubResource("GradientTexture2D_jpnj7")
+
+[node name="PointLight2D2" type="PointLight2D" parent="."]
+position = Vector2(-607.945, 1.755)
+scale = Vector2(-1, 11.406)
+texture = SubResource("GradientTexture2D_jpnj7")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+
+[node name="Play" type="TextureButton" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -93.0
+offset_top = -24.0
+offset_right = -31.0
+offset_bottom = 6.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(3, 3)
+texture_normal = ExtResource("2_iv4k6")
+texture_pressed = ExtResource("4_v2du1")
+texture_hover = ExtResource("3_kxv3f")
+
+[node name="Quit" type="TextureButton" parent="."]
+offset_left = -93.0
+offset_top = 78.0
+offset_right = -31.0
+offset_bottom = 108.0
+scale = Vector2(3, 3)
+texture_normal = ExtResource("5_mx2ml")
+texture_pressed = ExtResource("6_dt35o")
+texture_hover = ExtResource("7_dctlt")
+
+[node name="Setup" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_ypu6c")
+camera_attributes = SubResource("CameraAttributesPractical_qkcqr")
+compositor = SubResource("Compositor_pnps1")
+
+[connection signal="pressed" from="Play" to="." method="_on_play_pressed"]
+[connection signal="pressed" from="Quit" to="." method="_on_quit_pressed"]

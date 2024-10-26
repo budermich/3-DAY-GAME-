@@ -1,14 +1,17 @@
 extends Area2D
 var StartPos
 var dir = Vector2.LEFT
-var speed = 400
+var speed = 150
 var type:String = "aux"
 # Called when the node enters the scene tree for the first time.
+@onready var polygon_2d: Polygon2D = $Polygon2D
+
 func _ready():
-	var rand = randi_range(0,1)
+	var rand = randi_range(0,2)
 	match rand:
-		0: type="Deadly"; get_child(0).color.h=randf_range(0,100); get_child(0).color.r=0; get_child(0).color.g=0; get_child(0).color.b=0;
+		0: type="Deadly"; polygon_2d.color.r=1; polygon_2d.color.g=1; polygon_2d.color.b=1
 		1: type="Score"; get_child(0)
+		2: type="Speed"; polygon_2d.color.r=0; polygon_2d.color.g=0; polygon_2d.color.b=1;
 	StartPos = position.x 
 	print(rand)
 

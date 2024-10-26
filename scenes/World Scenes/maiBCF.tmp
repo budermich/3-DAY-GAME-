@@ -1,9 +1,8 @@
-[gd_scene load_steps=11 format=3 uid="uid://bmalrlk4nndy0"]
+[gd_scene load_steps=8 format=3 uid="uid://bmalrlk4nndy0"]
 
 [ext_resource type="PackedScene" uid="uid://ce5vdptnvr83l" path="res://scenes/player.tscn" id="2_7i0ox"]
 [ext_resource type="AudioStream" uid="uid://cp8lx5jqmcpsu" path="res://music/bg music.mp3" id="3_8avec"]
 [ext_resource type="Texture2D" uid="uid://cus836qjldeiq" path="res://art/bg.png" id="3_xhc24"]
-[ext_resource type="Texture2D" uid="uid://c58wu1akh7oor" path="res://art/score.png" id="4_vtxuh"]
 
 [sub_resource type="GDScript" id="GDScript_4j4bk"]
 script/source = "extends Node2D
@@ -12,9 +11,9 @@ var obstacle =  preload(\"res://scenes/Obstacles/DamageObstacle.tscn\")
 var obstacleInstance2 = obstacle.instantiate()
 var obstacleInstances = []
 
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	await get_tree().create_timer(5).timeout
 	var i = 0
 	while i < 16:
 		var obstacleInstance = obstacle.instantiate()  # Create a new instance for each iteration
@@ -34,7 +33,7 @@ glow_levels/1 = 16.0
 glow_levels/2 = 0.2
 glow_levels/3 = 0.0
 glow_levels/5 = 0.0
-glow_intensity = 0.15
+glow_intensity = 0.2
 glow_strength = 0.8
 glow_blend_mode = 1
 glow_hdr_threshold = 0.0
@@ -45,12 +44,6 @@ adjustment_saturation = 1.16
 [sub_resource type="CameraAttributesPractical" id="CameraAttributesPractical_ubnco"]
 
 [sub_resource type="Compositor" id="Compositor_bpim4"]
-
-[sub_resource type="Gradient" id="Gradient_f03wo"]
-interpolation_mode = 2
-
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_mtscw"]
-gradient = SubResource("Gradient_f03wo")
 
 [node name="Main" type="Node2D"]
 script = SubResource("GDScript_4j4bk")
@@ -97,28 +90,10 @@ stream = ExtResource("3_8avec")
 autoplay = true
 parameters/looping = true
 
-[node name="TextureRect" type="TextureRect" parent="."]
-offset_left = -594.0
-offset_top = -381.0
+[node name="Score Counter" type="RichTextLabel" parent="."]
+offset_left = -624.0
+offset_top = -353.0
 offset_right = -466.0
-offset_bottom = -253.0
-texture = ExtResource("4_vtxuh")
-
-[node name="Score Counter" type="RichTextLabel" parent="TextureRect"]
-layout_mode = 0
-offset_left = 114.0
-offset_top = 43.535
-offset_right = 144.0
-offset_bottom = 70.535
-scale = Vector2(1.8, 1.8)
-text = "0"
-
-[node name="PointLight2D" type="PointLight2D" parent="."]
-position = Vector2(609, 2)
-scale = Vector2(1, 11.4063)
-texture = SubResource("GradientTexture2D_mtscw")
-
-[node name="PointLight2D2" type="PointLight2D" parent="."]
-position = Vector2(-609, 1.97654)
-scale = Vector2(-1, 11.4525)
-texture = SubResource("GradientTexture2D_mtscw")
+offset_bottom = -328.0
+scale = Vector2(1.5, 1.5)
+text = "Score:"
