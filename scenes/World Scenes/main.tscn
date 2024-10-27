@@ -9,8 +9,9 @@
 script/source = "extends Node2D
 
 var obstacle =  preload(\"res://scenes/Obstacles/DamageObstacle.tscn\")
-var obstacleInstance2 = obstacle.instantiate()
 var obstacleInstances = []
+var obsRight = preload(\"res://scenes/Obstacles/damage_obstacel_other_direction.tscn\")
+var obsRightInstances = []
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -25,6 +26,15 @@ func _ready():
 		add_child(obstacleInstance)  # Add the new obstacle instance to the scene
 		obstacleInstances.append(obstacleInstance)
 		i += 1
+	var j = 0
+	while j < 16:
+		var obsRightInstance = obsRight.instantiate()  # Create a new instance for each iteration
+		var Yrange = randi_range(-300, 300)
+		var Xrange = randi_range(-800,-1500)
+		obsRightInstance.position = Vector2(Xrange, Yrange)
+		add_child(obsRightInstance)  # Add the new obstacle instance to the scene
+		obsRightInstances.append(obsRightInstance)
+		j += 1
 "
 
 [sub_resource type="Environment" id="Environment_2n7fq"]
