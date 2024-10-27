@@ -1,9 +1,19 @@
-[gd_scene load_steps=11 format=3 uid="uid://bmalrlk4nndy0"]
+[gd_scene load_steps=21 format=3 uid="uid://bmalrlk4nndy0"]
 
 [ext_resource type="PackedScene" uid="uid://ce5vdptnvr83l" path="res://scenes/player.tscn" id="2_7i0ox"]
+[ext_resource type="Texture2D" uid="uid://b8xyul3etn6bb" path="res://art/heart.png" id="2_dur7o"]
 [ext_resource type="AudioStream" uid="uid://cp8lx5jqmcpsu" path="res://music/bg music.mp3" id="3_8avec"]
 [ext_resource type="Texture2D" uid="uid://cus836qjldeiq" path="res://art/bg.png" id="3_xhc24"]
 [ext_resource type="Texture2D" uid="uid://c58wu1akh7oor" path="res://art/score.png" id="4_vtxuh"]
+[ext_resource type="Texture2D" uid="uid://bh4tr6sykonac" path="res://art/Buttons/gameover3.png" id="6_1juvf"]
+[ext_resource type="Script" path="res://scripts/game_over.gd" id="7_hyn6y"]
+[ext_resource type="Texture2D" uid="uid://dcesnswh01h3q" path="res://art/Buttons/back1.png" id="8_u54t1"]
+[ext_resource type="Texture2D" uid="uid://bsnql0cxc55jk" path="res://art/Buttons/back3.png" id="9_4aanl"]
+[ext_resource type="Texture2D" uid="uid://cocbor1fde0fb" path="res://art/Buttons/back2.png" id="10_t3xbo"]
+[ext_resource type="Script" path="res://scripts/gameoverControl.gd" id="11_blb27"]
+[ext_resource type="Texture2D" uid="uid://d1t6ex44i2rph" path="res://art/Buttons/retry1.png" id="12_ultv6"]
+[ext_resource type="Texture2D" uid="uid://dr3mdo22mljw4" path="res://art/Buttons/retry3.png" id="13_cpvnr"]
+[ext_resource type="Texture2D" uid="uid://hrtp8ak6qs5m" path="res://art/Buttons/retry2.png" id="14_e182t"]
 
 [sub_resource type="GDScript" id="GDScript_4j4bk"]
 script/source = "extends Node2D
@@ -14,11 +24,15 @@ var obsRight = preload(\"res://scenes/Obstacles/damage_obstacel_other_direction.
 var obsRightInstances = []
 
 # Called when the node enters the scene tree for the first time.
-func _ready():
+
+func _ready() -> void:
+	Spawn()
+
+func Spawn(): #recursive function
 	await get_tree().create_timer(5).timeout
 	var i = 0
 	while i < 16:
-		await get_tree().create_timer(randf_range(1,2))
+		await get_tree().create_timer(randf_range(5,7))
 		var obstacleInstance = obstacle.instantiate()  # Create a new instance for each iteration
 		var Yrange = randi_range(-300, 300)
 		var Xrange = randi_range(800,1500)
@@ -28,6 +42,7 @@ func _ready():
 		i += 1
 	var j = 0
 	while j < 16:
+		await get_tree().create_timer(randf_range(5,7))
 		var obsRightInstance = obsRight.instantiate()  # Create a new instance for each iteration
 		var Yrange = randi_range(-300, 300)
 		var Xrange = randi_range(-800,-1500)
@@ -35,6 +50,14 @@ func _ready():
 		add_child(obsRightInstance)  # Add the new obstacle instance to the scene
 		obsRightInstances.append(obsRightInstance)
 		j += 1
+	Spawn()
+
+func _on_back_pressed() -> void:
+	get_tree().change_scene_to_file(\"res://scenes/World Scenes/MainMenu.tscn\")
+
+
+func _on_retry_pressed() -> void:
+	get_tree().change_scene_to_file(\"res://scenes/load_screen.tscn\")
 "
 
 [sub_resource type="Environment" id="Environment_2n7fq"]
@@ -68,6 +91,24 @@ script = SubResource("GDScript_4j4bk")
 
 [node name="Player" parent="." instance=ExtResource("2_7i0ox")]
 z_index = 5
+
+[node name="Heart1" type="Sprite2D" parent="."]
+texture_filter = 1
+position = Vector2(488, -328)
+scale = Vector2(1.6, 1.6)
+texture = ExtResource("2_dur7o")
+
+[node name="Heart2" type="Sprite2D" parent="."]
+texture_filter = 1
+position = Vector2(544, -328)
+scale = Vector2(1.6, 1.6)
+texture = ExtResource("2_dur7o")
+
+[node name="Heart3" type="Sprite2D" parent="."]
+texture_filter = 1
+position = Vector2(600, -328)
+scale = Vector2(1.6, 1.6)
+texture = ExtResource("2_dur7o")
 
 [node name="Setup" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_2n7fq")
@@ -133,3 +174,57 @@ texture = SubResource("GradientTexture2D_mtscw")
 position = Vector2(-609, 1.97654)
 scale = Vector2(-1, 11.4525)
 texture = SubResource("GradientTexture2D_mtscw")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+follow_viewport_enabled = true
+
+[node name="GameOver" type="Sprite2D" parent="CanvasLayer"]
+modulate = Color(1, 1, 1, 0)
+texture_filter = 1
+position = Vector2(0, -64)
+scale = Vector2(2, 2)
+texture = ExtResource("6_1juvf")
+script = ExtResource("7_hyn6y")
+
+[node name="Back" type="TextureButton" parent="CanvasLayer"]
+modulate = Color(1, 1, 1, 0)
+texture_filter = 1
+offset_left = -158.0
+offset_right = -96.0
+offset_bottom = 40.0
+scale = Vector2(2, 2)
+texture_normal = ExtResource("8_u54t1")
+texture_pressed = ExtResource("9_4aanl")
+texture_hover = ExtResource("10_t3xbo")
+script = ExtResource("11_blb27")
+delay = 5.0
+
+[node name="Retry" type="TextureButton" parent="CanvasLayer"]
+modulate = Color(1, 1, 1, 0)
+texture_filter = 1
+offset_left = 35.065
+offset_right = 75.065
+offset_bottom = 40.0
+scale = Vector2(2, 2)
+texture_normal = ExtResource("12_ultv6")
+texture_pressed = ExtResource("13_cpvnr")
+texture_hover = ExtResource("14_e182t")
+script = ExtResource("11_blb27")
+delay = 4.0
+
+[node name="BgCover" type="Sprite2D" parent="CanvasLayer"]
+modulate = Color(1, 1, 1, 0)
+z_index = -1
+position = Vector2(0, 15.5)
+scale = Vector2(1, 1.15417)
+texture = ExtResource("3_xhc24")
+script = ExtResource("7_hyn6y")
+delay = 0.1
+desiredModulate = 0.7
+
+[connection signal="loss" from="Player" to="CanvasLayer/GameOver" method="gameover"]
+[connection signal="loss" from="Player" to="CanvasLayer/Back" method="gameover"]
+[connection signal="loss" from="Player" to="CanvasLayer/Retry" method="gameover"]
+[connection signal="loss" from="Player" to="CanvasLayer/BgCover" method="gameover"]
+[connection signal="pressed" from="CanvasLayer/Back" to="." method="_on_back_pressed"]
+[connection signal="pressed" from="CanvasLayer/Retry" to="." method="_on_retry_pressed"]

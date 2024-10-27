@@ -2,7 +2,6 @@ extends Node2D
 var rand:int
 func _ready() -> void:
 	rand=randi_range(-1,1)
-	print(rand)
 	var particle=preload("res://scenes/+1_explosion_particle.tscn").instantiate()
 	particle.global_position=global_position-Vector2(10,0)
 	get_parent().add_child(particle)
