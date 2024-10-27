@@ -1,6 +1,6 @@
 extends Area2D
 var StartPos
-var dir = Vector2.LEFT
+var dir = Vector2.RIGHT
 var speed = 400
 var type:String = "aux"
 # Called when the node enters the scene tree for the first time.
