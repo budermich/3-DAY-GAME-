@@ -40,5 +40,10 @@ attenuation = 1.03527
 wait_time = 5.0
 one_shot = true
 
+[node name="EnlargeTimer" type="Timer" parent="."]
+wait_time = 5.0
+one_shot = true
+
 [connection signal="area_entered" from="Collision" to="." method="_on_collision_area_entered"]
 [connection signal="timeout" from="BuffTimer" to="." method="_on_buff_timer_timeout"]
+[connection signal="timeout" from="EnlargeTimer" to="." method="_on_enlarge_timer_timeout"]

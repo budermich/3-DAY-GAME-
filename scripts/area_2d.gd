@@ -7,13 +7,13 @@ var type:String = "aux"
 @onready var polygon_2d: Polygon2D = $Polygon2D
 
 func _ready():
-	var rand = randi_range(0,2)
+	var rand = randi_range(0,3)
 	match rand:
 		0: type="Deadly"; polygon_2d.color.r=1; polygon_2d.color.g=1; polygon_2d.color.b=1
-		1: type="Score"; get_child(0)
-		2: type="Speed"; polygon_2d.color.r=0; polygon_2d.color.g=0; polygon_2d.color.b=1;
+		1: type="Score"
+		2: type="Speed"; polygon_2d.color.r=0; polygon_2d.color.g=0; polygon_2d.color.b=1
+		3: type="Enlargen"; polygon_2d.color.g=1; polygon_2d.color.r=0; polygon_2d.color.b=0
 	StartPos = position.x 
-	print(rand)
 
 func _process(delta):
 	position += dir*speed*delta

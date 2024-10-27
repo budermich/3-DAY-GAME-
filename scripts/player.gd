@@ -15,22 +15,22 @@ func _ready() -> void:
 func _input(_event: InputEvent) -> void:
 	if Input.is_action_just_pressed("down") and !moving:
 		var particleInstance=particles.instantiate()
-		wantedPosition=clamp(position.y+32,-320,320)
+		wantedPosition=clamp(position.y+32*Enlargen,-320,320)
 		initPos=position.y
 		particleInstance.get_process_material().gravity.y=-abs(particleInstance.get_process_material().gravity.y)
 		particleInstance.scale.y=-1
 		particleInstance.emitting=true
 		polygon.add_child(particleInstance)
-		if(wantedPosition>=position.y+32):
+		if(wantedPosition>=position.y+32*Enlargen):
 			Move(-1)
 	if Input.is_action_just_pressed("Up") and !moving:
 		var particleInstance=particles.instantiate()
-		wantedPosition=clamp(position.y-32,-320,320)
+		wantedPosition=clamp(position.y-32*Enlargen,-320,320)
 		initPos=position.y
 		particleInstance.get_process_material().gravity.y=abs(particleInstance.get_process_material().gravity.y)
 		particleInstance.emitting=true
 		polygon.add_child(particleInstance)
-		if(wantedPosition<=position.y-32):
+		if(wantedPosition<=position.y-32*Enlargen):
 			Move(1)
 
 
@@ -39,9 +39,11 @@ func _input(_event: InputEvent) -> void:
 @onready var score_sound: AudioStreamPlayer2D = $ScoreSound
 @onready var buff_timer: Timer = $BuffTimer
 @onready var speed_sound: AudioStreamPlayer2D = $SpeedSound
+@onready var enlarge_timer: Timer = $EnlargeTimer
 
 var Anim1=preload("res://scenes/+1Score.tscn")
 
+var Enlargen=1
 #i need to work with you here, i need types of blocks.
 func _on_collision_area_entered(area: Area2D) -> void:
 	if(area.type=="Deadly"):
@@ -66,23 +68,39 @@ func _on_collision_area_entered(area: Area2D) -> void:
 		speed_sound.play()
 		SpeedUp=2
 		polygon.modulate=Color8(0,255,0,255)
+	elif(area.type=="Enlargen"):
+		enlarge_timer.stop()
+		enlarge_timer.start()
+		Enlargen=2
+		EnlargenUpAnimate(get_process_delta_time())
 	area.get_parent().queue_free()
 
 var moving=false
-func Move(where): #Guaranteed consistent movement that calls the animation functions(DEPENDS ON SPEED, Small speed=fast, Big speed=slow
+func Move(where): #Guaranteed consistent movement that calls the animation functions(DEPENDS ON SPEED, Small speed=fast, Big speed=slow)
 	moving=true
 	AnimateX(get_process_delta_time())
 	AnimateY(get_process_delta_time())
 	await get_tree().create_timer(0.01).timeout
-	while(abs(wantedPosition-position.y)>1*SpeedUp):
+	while(abs(wantedPosition-position.y)>4*SpeedUp):
 		await get_tree().create_timer(0.01).timeout
 		position.y+=(abs(initPos-wantedPosition)/(speed/SpeedUp))*where*-1.2
 	position.y=wantedPosition
 	moving=false
-	scale=initScale
+	scale=initScale*Vector2(1,Enlargen)
 
 @export var initScale:Vector2
 #The x scaling changes when u move
+
+func EnlargenUpAnimate(delta):
+	while(scale.y<1.6):
+		scale.y+=8*delta*SpeedUp
+		await get_tree().create_timer(0.001).timeout
+
+func EnlargenDownAnimate(delta):
+	while(scale.y>0.8):
+		scale.y-=8*delta*SpeedUp
+		await get_tree().create_timer(0.001).timeout
+
 func AnimateX(delta):
 	while(scale.x>0.4 and moving):
 		scale.x-=5*delta*SpeedUp
@@ -93,10 +111,10 @@ func AnimateX(delta):
 
 #The y scaling changes when u move
 func AnimateY(delta):
-	while(scale.y<1.2 and moving):
+	while(scale.y<1.2*Enlargen and moving):
 		scale.y+=5*delta*SpeedUp
 		await get_tree().create_timer(0.001).timeout
-	while(scale.y>0.8 and moving):
+	while(scale.y>0.8*Enlargen and moving):
 		scale.y-=5*delta*SpeedUp
 		await get_tree().create_timer(0.001).timeout
 
@@ -126,6 +144,9 @@ func _on_buff_timer_timeout() -> void:
 	SpeedUp=1
 	polygon.modulate=Color8(255,255,255,255)
 
+func _on_enlarge_timer_timeout() -> void:
+	EnlargenDownAnimate(get_process_delta_time())
+	Enlargen=1
 
 func YouLose():
 	pass
