@@ -3,8 +3,7 @@ var StartPos
 var dir = Vector2.LEFT
 var speed = 150
 var type:String = "aux"
-# Called when the node enters the scene tree for the first time.
-@onready var polygon_2d: Polygon2D = $Polygon2D
+ss@onready var polygon_2d: Polygon2D = $Polygon2D
 
 func _ready():
 	var rand = randi_range(0,3)
