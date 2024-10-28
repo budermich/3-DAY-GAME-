@@ -51,6 +51,16 @@ position = Vector2(0, 1.49999)
 scale = Vector2(1, 1.01528)
 texture = ExtResource("5_ujgj4")
 
+[node name="Quit" type="TextureButton" parent="Background"]
+offset_left = -93.0
+offset_top = 78.0
+offset_right = -31.0
+offset_bottom = 108.0
+scale = Vector2(3, 3)
+texture_normal = ExtResource("5_mx2ml")
+texture_pressed = ExtResource("6_dt35o")
+texture_hover = ExtResource("7_dctlt")
+
 [node name="PointLight2D" type="PointLight2D" parent="."]
 position = Vector2(609, 2)
 scale = Vector2(1, 11.4063)
@@ -95,5 +105,6 @@ environment = SubResource("Environment_ypu6c")
 camera_attributes = SubResource("CameraAttributesPractical_qkcqr")
 compositor = SubResource("Compositor_pnps1")
 
+[connection signal="pressed" from="Background/Quit" to="." method="_on_quit_pressed"]
 [connection signal="pressed" from="Play" to="." method="_on_play_pressed"]
 [connection signal="pressed" from="Quit" to="." method="_on_quit_pressed"]

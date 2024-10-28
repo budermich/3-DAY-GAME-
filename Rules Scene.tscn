@@ -1,0 +1,119 @@
+[gd_scene load_steps=14 format=3 uid="uid://dlwim1f0lalpg"]
+
+[ext_resource type="Texture2D" uid="uid://cus836qjldeiq" path="res://art/bg.png" id="1_tyinm"]
+[ext_resource type="Script" path="res://scripts/game_over.gd" id="2_2qit1"]
+[ext_resource type="Texture2D" uid="uid://doqlucrsno6ns" path="res://art/White block (damage).JPG" id="3_d3dk5"]
+[ext_resource type="Texture2D" uid="uid://x0jeavbf4n7s" path="res://art/Green block (size up).JPG" id="4_cwequ"]
+[ext_resource type="Texture2D" uid="uid://bq6mu7trwxt6l" path="res://art/Blue Block (speed).JPG" id="5_lv5rb"]
+[ext_resource type="Texture2D" uid="uid://cg45iry2ru73q" path="res://art/Pink block (score).JPG" id="6_dgq8e"]
+
+[sub_resource type="Environment" id="Environment_2u6ea"]
+background_mode = 3
+tonemap_mode = 2
+glow_enabled = true
+glow_levels/1 = 16.0
+glow_levels/2 = 0.2
+glow_levels/3 = 0.0
+glow_levels/5 = 0.0
+glow_intensity = 0.15
+glow_strength = 0.8
+glow_blend_mode = 1
+glow_hdr_threshold = 0.0
+adjustment_enabled = true
+adjustment_contrast = 1.08
+adjustment_saturation = 1.16
+
+[sub_resource type="CameraAttributesPractical" id="CameraAttributesPractical_h72uo"]
+
+[sub_resource type="Compositor" id="Compositor_etifk"]
+
+[sub_resource type="Gradient" id="Gradient_f03wo"]
+interpolation_mode = 2
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_3telx"]
+gradient = SubResource("Gradient_f03wo")
+
+[sub_resource type="Gradient" id="Gradient_e2alg"]
+interpolation_mode = 2
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_na5kq"]
+gradient = SubResource("Gradient_e2alg")
+
+[node name="Rules Scene" type="Node2D"]
+
+[node name="Setup" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_2u6ea")
+camera_attributes = SubResource("CameraAttributesPractical_h72uo")
+compositor = SubResource("Compositor_etifk")
+
+[node name="BgCover" type="Sprite2D" parent="."]
+modulate = Color(1, 1, 1, 0)
+z_index = -1
+position = Vector2(0, 9.53674e-07)
+scale = Vector2(1, 1.15417)
+texture = ExtResource("1_tyinm")
+script = ExtResource("2_2qit1")
+delay = 0.1
+desiredModulate = 0.7
+
+[node name="PointLight2D" type="PointLight2D" parent="BgCover"]
+position = Vector2(609, 2)
+scale = Vector2(1, 11.4063)
+texture = SubResource("GradientTexture2D_3telx")
+
+[node name="PointLight2D2" type="PointLight2D" parent="BgCover"]
+position = Vector2(-609, 1.97654)
+scale = Vector2(-1, 11.4525)
+texture = SubResource("GradientTexture2D_na5kq")
+
+[node name="Background" type="Sprite2D" parent="."]
+z_index = -5
+scale = Vector2(1, 1.17181)
+texture = ExtResource("1_tyinm")
+
+[node name="Damage" type="Sprite2D" parent="."]
+position = Vector2(-120, -110)
+texture = ExtResource("3_d3dk5")
+
+[node name="Size" type="Sprite2D" parent="."]
+position = Vector2(194, -110)
+texture = ExtResource("4_cwequ")
+
+[node name="Speed" type="Sprite2D" parent="."]
+position = Vector2(-331, -109)
+texture = ExtResource("5_lv5rb")
+
+[node name="Score" type="Sprite2D" parent="."]
+position = Vector2(436.685, -109)
+texture = ExtResource("6_dgq8e")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
+offset_left = 112.0
+offset_top = -82.0
+offset_right = 279.0
+offset_bottom = -24.0
+text = "Green Block Causes Size Up"
+
+[node name="RichTextLabel2" type="RichTextLabel" parent="."]
+offset_left = 362.0
+offset_top = -82.0
+offset_right = 529.0
+offset_bottom = -24.0
+text = "Pink Block Makes Score +1"
+
+[node name="RichTextLabel3" type="RichTextLabel" parent="."]
+offset_left = -198.0
+offset_top = -82.0
+offset_right = -31.0
+offset_bottom = -24.0
+text = "White Block Kills You
+"
+
+[node name="RichTextLabel4" type="RichTextLabel" parent="."]
+offset_left = -402.0
+offset_top = -82.0
+offset_right = -235.0
+offset_bottom = -24.0
+text = "Blue Block Causes Speed Increase"

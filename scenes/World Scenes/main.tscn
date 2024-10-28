@@ -80,11 +80,11 @@ adjustment_saturation = 1.16
 
 [sub_resource type="Compositor" id="Compositor_bpim4"]
 
-[sub_resource type="Gradient" id="Gradient_f03wo"]
+[sub_resource type="Gradient" id="Gradient_4cghf"]
 interpolation_mode = 2
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_mtscw"]
-gradient = SubResource("Gradient_f03wo")
+gradient = SubResource("Gradient_4cghf")
 
 [node name="Main" type="Node2D"]
 script = SubResource("GDScript_4j4bk")

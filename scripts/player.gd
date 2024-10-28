@@ -18,7 +18,7 @@ func _ready() -> void:
 	Hearts.append($"../Heart3")
 
 func _input(_event: InputEvent) -> void:
-	if Input.is_action_just_pressed("down") and !moving:
+	if Input.is_action_pressed("down")  and !moving or  Input.is_action_pressed("Arrow Down")  and !moving:
 		var particleInstance=particles.instantiate()
 		wantedPosition=clamp(position.y+32,-320,320)
 		initPos=position.y
@@ -28,7 +28,7 @@ func _input(_event: InputEvent) -> void:
 		polygon.add_child(particleInstance)
 		if(wantedPosition>=position.y+32):
 			Move(-1)
-	if Input.is_action_just_pressed("Up") and !moving:
+	if Input.is_action_pressed("Up")  and !moving or  Input.is_action_pressed("Arrow Up") and !moving:
 		var particleInstance=particles.instantiate()
 		wantedPosition=clamp(position.y-32,-320,320)
 		initPos=position.y
