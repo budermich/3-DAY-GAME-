@@ -1,0 +1,170 @@
+[gd_scene load_steps=19 format=3 uid="uid://dlwim1f0lalpg"]
+
+[ext_resource type="Script" path="res://scripts/rules_scene.gd" id="1_or4pu"]
+[ext_resource type="Texture2D" uid="uid://cus836qjldeiq" path="res://art/bg.png" id="2_tjgvq"]
+[ext_resource type="Texture2D" uid="uid://doqlucrsno6ns" path="res://art/White block (damage).JPG" id="3_2fmaa"]
+[ext_resource type="Texture2D" uid="uid://x0jeavbf4n7s" path="res://art/Green block (size up).JPG" id="4_nkunl"]
+[ext_resource type="Texture2D" uid="uid://ct6xeisrfweq2" path="res://art/Blue Block.JPG" id="5_cmvk3"]
+[ext_resource type="Texture2D" uid="uid://cg45iry2ru73q" path="res://art/Pink block (score).JPG" id="6_3sfor"]
+[ext_resource type="Texture2D" uid="uid://b0xs13hobcqs8" path="res://art/+1hp.png" id="7_wd1na"]
+[ext_resource type="Texture2D" uid="uid://dcesnswh01h3q" path="res://art/Buttons/back1.png" id="8_l3ijp"]
+[ext_resource type="Texture2D" uid="uid://bsnql0cxc55jk" path="res://art/Buttons/back3.png" id="9_aiis4"]
+[ext_resource type="Texture2D" uid="uid://cocbor1fde0fb" path="res://art/Buttons/back2.png" id="10_jm2nr"]
+[ext_resource type="Texture2D" uid="uid://do0ryasi10f3e" path="res://art/sprite.png" id="11_kao1w"]
+
+[sub_resource type="Environment" id="Environment_2u6ea"]
+background_mode = 3
+tonemap_mode = 2
+glow_enabled = true
+glow_levels/1 = 16.0
+glow_levels/2 = 0.2
+glow_levels/3 = 0.0
+glow_levels/5 = 0.0
+glow_intensity = 0.15
+glow_strength = 0.8
+glow_blend_mode = 1
+glow_hdr_threshold = 0.0
+adjustment_enabled = true
+adjustment_contrast = 1.08
+adjustment_saturation = 1.16
+
+[sub_resource type="CameraAttributesPractical" id="CameraAttributesPractical_h72uo"]
+
+[sub_resource type="Compositor" id="Compositor_etifk"]
+
+[sub_resource type="Gradient" id="Gradient_f03wo"]
+interpolation_mode = 2
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_3telx"]
+gradient = SubResource("Gradient_f03wo")
+
+[sub_resource type="Gradient" id="Gradient_e2alg"]
+interpolation_mode = 2
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_na5kq"]
+gradient = SubResource("Gradient_e2alg")
+
+[node name="Rules Scene" type="Node2D"]
+script = ExtResource("1_or4pu")
+
+[node name="Setup" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_2u6ea")
+camera_attributes = SubResource("CameraAttributesPractical_h72uo")
+compositor = SubResource("Compositor_etifk")
+
+[node name="BgCover" type="Sprite2D" parent="."]
+modulate = Color(1, 1, 1, 0)
+z_index = -1
+position = Vector2(0, 9.53674e-07)
+scale = Vector2(1, 1.15417)
+texture = ExtResource("2_tjgvq")
+
+[node name="PointLight2D" type="PointLight2D" parent="BgCover"]
+position = Vector2(609, 2)
+scale = Vector2(1, 11.4063)
+texture = SubResource("GradientTexture2D_3telx")
+
+[node name="PointLight2D2" type="PointLight2D" parent="BgCover"]
+position = Vector2(-609, 1.97654)
+scale = Vector2(-1, 11.4525)
+texture = SubResource("GradientTexture2D_na5kq")
+
+[node name="Background" type="Sprite2D" parent="."]
+z_index = -5
+scale = Vector2(1, 1.17181)
+texture = ExtResource("2_tjgvq")
+
+[node name="Damage" type="Sprite2D" parent="."]
+position = Vector2(-396.455, -15)
+texture = ExtResource("3_2fmaa")
+
+[node name="White" type="RichTextLabel" parent="Damage"]
+offset_left = -73.42
+offset_top = 28.0
+offset_right = 93.58
+offset_bottom = 86.0
+text = "White Block Causes
+Death
+"
+
+[node name="Size" type="Sprite2D" parent="."]
+position = Vector2(236.41, -15)
+texture = ExtResource("4_nkunl")
+
+[node name="Green" type="RichTextLabel" parent="Size"]
+offset_left = -75.37
+offset_top = 28.0
+offset_right = 91.63
+offset_bottom = 86.0
+text = "Green Block Causes Size Increase"
+
+[node name="Speed" type="Sprite2D" parent="."]
+position = Vector2(466, -15)
+texture = ExtResource("5_cmvk3")
+
+[node name="Blue" type="RichTextLabel" parent="Speed"]
+offset_left = -71.66
+offset_top = 27.0
+offset_right = 95.34
+offset_bottom = 85.0
+text = "Blue Block Causes Speed Increase"
+
+[node name="Score" type="Sprite2D" parent="."]
+position = Vector2(23, -15)
+texture = ExtResource("6_3sfor")
+
+[node name="Pink" type="RichTextLabel" parent="Score"]
+offset_left = -67.88
+offset_top = 27.0
+offset_right = 99.12
+offset_bottom = 85.0
+text = "Pink Block Causes
+Score Up"
+
+[node name="+HP" type="Sprite2D" parent="."]
+position = Vector2(-181, -15)
+scale = Vector2(0.5, 0.6)
+texture = ExtResource("7_wd1na")
+
+[node name="Yellow" type="RichTextLabel" parent="."]
+offset_left = -256.375
+offset_top = 12.0
+offset_right = -93.375
+offset_bottom = 147.0
+text = "Yellow block Causes
+Hp Up"
+
+[node name="Camera2D" type="Camera2D" parent="."]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+follow_viewport_enabled = true
+
+[node name="Back" type="TextureButton" parent="CanvasLayer"]
+texture_filter = 1
+offset_left = 461.0
+offset_top = 271.0
+offset_right = 523.0
+offset_bottom = 301.0
+scale = Vector2(2.5, 2.5)
+texture_normal = ExtResource("8_l3ijp")
+texture_pressed = ExtResource("9_aiis4")
+texture_hover = ExtResource("10_jm2nr")
+
+[node name="SQUARZ" type="Sprite2D" parent="CanvasLayer"]
+texture_filter = 1
+position = Vector2(0, -185.447)
+scale = Vector2(0.6, 0.615473)
+texture = ExtResource("11_kao1w")
+
+[node name="Movement" type="RichTextLabel" parent="."]
+offset_left = -470.0
+offset_top = 141.0
+offset_right = -223.0
+offset_bottom = 328.0
+text = "Movement:
+
+Up - W or up arrow
+
+Down - S or down arrow"
+
+[connection signal="pressed" from="CanvasLayer/Back" to="." method="_on_back_pressed"]

@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://dmlt7absajf18"]
 
-[ext_resource type="Script" path="res://scenes/Obstacles/ObsRight.gd" id="1_24hks"]
+[ext_resource type="Script" path="res://scripts/ObsRight.gd" id="1_24hks"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_k4huo"]
 size = Vector2(62, 27)

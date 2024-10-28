@@ -1,7 +1,7 @@
 extends Node2D
 
 var hp=3
-var speed=300 #make it small
+var speed=2 #make it small
 var wantedPosition=position.y
 var initPos=0
 @onready var particles = preload("res://scenes/MovementParticle.tscn")
@@ -20,7 +20,7 @@ func _ready() -> void:
 func _input(_event: InputEvent) -> void:
 	if Input.is_action_pressed("down")  and !moving:
 		var particleInstance=particles.instantiate()
-		wantedPosition=clamp(position.y+32,-320,320)
+		wantedPosition=clamp(position.y+(32*Enlargen),-320,320)
 		initPos=position.y
 		particleInstance.get_process_material().gravity.y=-abs(particleInstance.get_process_material().gravity.y)
 		particleInstance.scale.y=-1
@@ -29,7 +29,7 @@ func _input(_event: InputEvent) -> void:
 		Move(-1)
 	if Input.is_action_just_pressed("Up") and !moving:
 		var particleInstance=particles.instantiate()
-		wantedPosition=clamp(position.y-32,-320,320)
+		wantedPosition=clamp(position.y-(32*Enlargen),-320,320)
 		initPos=position.y
 		particleInstance.get_process_material().gravity.y=abs(particleInstance.get_process_material().gravity.y)
 		particleInstance.emitting=true
@@ -91,14 +91,13 @@ func _on_collision_area_entered(area: Area2D) -> void:
 
 var moving=false
 func Move(where):
-	var delta=get_process_delta_time()
 	moving=true
 	AnimateX(get_process_delta_time())
 	AnimateY(get_process_delta_time())
 	await get_tree().create_timer(0.01).timeout
 	while((position.y>wantedPosition and where==1) or (position.y<wantedPosition and where==-1)):
 		await get_tree().create_timer(0.01).timeout
-		position.y+=speed*SpeedUp*where*-1.2*delta
+		position.y+=speed*SpeedUp*where*-1.2
 	position.y=wantedPosition
 	moving=false
 	scale=initScale*Vector2(1,Enlargen)
@@ -167,7 +166,7 @@ func _on_buff_timer_timeout() -> void:
 	await get_tree().create_timer(1).timeout
 	if(buffed==false):
 		SpeedUp=1
-		polygon.modulate=Color8(255,255,255,255)
+	polygon.modulate=Color8(255,255,255,255)
 
 func _on_enlarge_timer_timeout() -> void:
 	EnlargenDownAnimate(get_process_delta_time())

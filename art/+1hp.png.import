@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://d2pn0vhyn7pgu"
-path="res://.godot/imported/Pink block (score).JPG-0ccc8aa9f5146fa251ea4c8f2ab9bb97.ctex"
+uid="uid://b0xs13hobcqs8"
+path="res://.godot/imported/+1hp.png-49a84ea06b54d50afb548bbf241621d6.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://scenes/Obstacles/Pink block (score).JPG"
-dest_files=["res://.godot/imported/Pink block (score).JPG-0ccc8aa9f5146fa251ea4c8f2ab9bb97.ctex"]
+source_file="res://art/+1hp.png"
+dest_files=["res://.godot/imported/+1hp.png-49a84ea06b54d50afb548bbf241621d6.ctex"]
 
 [params]
 

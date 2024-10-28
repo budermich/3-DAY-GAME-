@@ -1,6 +1,6 @@
-[gd_scene load_steps=15 format=3 uid="uid://cjx7vgw2j82oe"]
+[gd_scene load_steps=18 format=3 uid="uid://cjx7vgw2j82oe"]
 
-[ext_resource type="Script" path="res://scriptsmain_menu.gd" id="1_d8gnn"]
+[ext_resource type="Script" path="res://scripts/scriptsmain_menu.gd" id="1_d8gnn"]
 [ext_resource type="Texture2D" uid="uid://wa1kpatyr8ti" path="res://art/Buttons/play1.png" id="2_iv4k6"]
 [ext_resource type="Texture2D" uid="uid://do0ryasi10f3e" path="res://art/sprite.png" id="2_jkjwb"]
 [ext_resource type="Texture2D" uid="uid://csmc53280iy0s" path="res://art/Buttons/play2.png" id="3_kxv3f"]
@@ -9,6 +9,9 @@
 [ext_resource type="Texture2D" uid="uid://cus836qjldeiq" path="res://art/bg.png" id="5_ujgj4"]
 [ext_resource type="Texture2D" uid="uid://cqkrxsfjmsdq8" path="res://art/Buttons/quit3.png" id="6_dt35o"]
 [ext_resource type="Texture2D" uid="uid://xta8rwfcf86p" path="res://art/Buttons/quit2.png" id="7_dctlt"]
+[ext_resource type="Texture2D" uid="uid://c57jiogpiblx5" path="res://art/Buttons/info1.png" id="10_0cw8h"]
+[ext_resource type="Texture2D" uid="uid://bndlramvwy43r" path="res://art/Buttons/info3.png" id="11_btx35"]
+[ext_resource type="Texture2D" uid="uid://t7yu3267rje8" path="res://art/Buttons/info2.png" id="12_xat4f"]
 
 [sub_resource type="Gradient" id="Gradient_vh7a5"]
 interpolation_mode = 2
@@ -51,16 +54,6 @@ position = Vector2(0, 1.49999)
 scale = Vector2(1, 1.01528)
 texture = ExtResource("5_ujgj4")
 
-[node name="Quit" type="TextureButton" parent="Background"]
-offset_left = -93.0
-offset_top = 78.0
-offset_right = -31.0
-offset_bottom = 108.0
-scale = Vector2(3, 3)
-texture_normal = ExtResource("5_mx2ml")
-texture_pressed = ExtResource("6_dt35o")
-texture_hover = ExtResource("7_dctlt")
-
 [node name="PointLight2D" type="PointLight2D" parent="."]
 position = Vector2(609, 2)
 scale = Vector2(1, 11.4063)
@@ -92,19 +85,29 @@ texture_hover = ExtResource("3_kxv3f")
 
 [node name="Quit" type="TextureButton" parent="."]
 offset_left = -93.0
-offset_top = 78.0
+offset_top = 187.0
 offset_right = -31.0
-offset_bottom = 108.0
+offset_bottom = 217.0
 scale = Vector2(3, 3)
 texture_normal = ExtResource("5_mx2ml")
 texture_pressed = ExtResource("6_dt35o")
 texture_hover = ExtResource("7_dctlt")
+
+[node name="Info" type="TextureButton" parent="."]
+offset_left = -93.0
+offset_top = 78.0
+offset_right = -31.0
+offset_bottom = 108.0
+scale = Vector2(3, 3)
+texture_normal = ExtResource("10_0cw8h")
+texture_pressed = ExtResource("11_btx35")
+texture_hover = ExtResource("12_xat4f")
 
 [node name="Setup" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_ypu6c")
 camera_attributes = SubResource("CameraAttributesPractical_qkcqr")
 compositor = SubResource("Compositor_pnps1")
 
-[connection signal="pressed" from="Background/Quit" to="." method="_on_quit_pressed"]
 [connection signal="pressed" from="Play" to="." method="_on_play_pressed"]
 [connection signal="pressed" from="Quit" to="." method="_on_quit_pressed"]
+[connection signal="pressed" from="Info" to="." method="_on_tutorial_pressed"]
