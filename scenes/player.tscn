@@ -39,11 +39,9 @@ pitch_scale = 8.0
 attenuation = 1.03527
 
 [node name="EnlargenSound" type="AudioStreamPlayer2D" parent="."]
-scale = Vector2(1, 1)
 stream = ExtResource("3_f7wuv")
 
 [node name="Life+Sound" type="AudioStreamPlayer2D" parent="."]
-scale = Vector2(1, 1)
 stream = ExtResource("4_vruw6")
 pitch_scale = 5.0
 attenuation = 3.24901
