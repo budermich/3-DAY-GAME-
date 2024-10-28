@@ -10,8 +10,11 @@ func _process(delta: float) -> void:
 	GoUp(delta)
 	Animate(rand)
 
+@onready var initpos=global_position.y
 func GoUp(delta):
 	position.y-=delta*200
+	if(position.y<initpos-40):
+		queue_free()
 
 
 func Animate(rand):
