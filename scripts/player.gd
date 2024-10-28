@@ -27,7 +27,7 @@ func _input(_event: InputEvent) -> void:
 		particleInstance.emitting=true
 		polygon.add_child(particleInstance)
 		Move(-1)
-	if Input.is_action_just_pressed("Up") and !moving:
+	if Input.is_action_pressed("Up") and !moving:
 		var particleInstance=particles.instantiate()
 		wantedPosition=clamp(position.y-(32*Enlargen),-320,320)
 		initPos=position.y
