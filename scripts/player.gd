@@ -1,7 +1,7 @@
 extends Node2D
 
 var hp=3
-var speed=2 #make it small
+var speed=300 #make it small
 var wantedPosition=position.y
 var initPos=0
 @onready var particles = preload("res://scenes/MovementParticle.tscn")
@@ -26,17 +26,15 @@ func _input(_event: InputEvent) -> void:
 		particleInstance.scale.y=-1
 		particleInstance.emitting=true
 		polygon.add_child(particleInstance)
-		if(wantedPosition>=position.y+32):
-			Move(-1)
-	if Input.is_action_pressed("Up")  and !moving:
+		Move(-1)
+	if Input.is_action_just_pressed("Up") and !moving:
 		var particleInstance=particles.instantiate()
 		wantedPosition=clamp(position.y-32,-320,320)
 		initPos=position.y
 		particleInstance.get_process_material().gravity.y=abs(particleInstance.get_process_material().gravity.y)
 		particleInstance.emitting=true
 		polygon.add_child(particleInstance)
-		if(wantedPosition<=position.y-32):
-			Move(1)
+		Move(1)
 
 
 @onready var score_counter: RichTextLabel = $"../TextureRect/Score Counter"
@@ -45,6 +43,8 @@ func _input(_event: InputEvent) -> void:
 @onready var buff_timer: Timer = $BuffTimer
 @onready var speed_sound: AudioStreamPlayer2D = $SpeedSound
 @onready var enlarge_timer: Timer = $EnlargeTimer
+@onready var enlargen_sound: AudioStreamPlayer2D = $EnlargenSound
+@onready var life_sound: AudioStreamPlayer2D = $"Life+Sound"
 
 var Anim1=preload("res://scenes/+1Score.tscn")
 
@@ -79,22 +79,29 @@ func _on_collision_area_entered(area: Area2D) -> void:
 		enlarge_timer.stop()
 		enlarge_timer.start()
 		Enlargen=1.5
+		enlargen_sound.play()
 		EnlargenUpAnimate(get_process_delta_time())
+	elif(area.type=="Life+" and !GameOver):
+		life_sound.play()
+		index+=1
+		hp+=1
+		hp=clamp(hp,0,3);
+		Hearts[index].show()
 	area.get_parent().queue_free()
 
 var moving=false
 func Move(where):
+	var delta=get_process_delta_time()
 	moving=true
 	AnimateX(get_process_delta_time())
 	AnimateY(get_process_delta_time())
 	await get_tree().create_timer(0.01).timeout
-	while(abs(wantedPosition-position.y)>4*SpeedUp):
+	while((position.y>wantedPosition and where==1) or (position.y<wantedPosition and where==-1)):
 		await get_tree().create_timer(0.01).timeout
-		position.y+=speed*SpeedUp*where*-1.2
+		position.y+=speed*SpeedUp*where*-1.2*delta
 	position.y=wantedPosition
 	moving=false
 	scale=initScale*Vector2(1,Enlargen)
-	print(speed*SpeedUp*where*-1.2)
 
 @export var initScale:Vector2
 #The x scaling changes when u move
@@ -108,6 +115,7 @@ func EnlargenDownAnimate(delta):
 	while(scale.y>0.8):
 		scale.y-=8*delta*SpeedUp
 		await get_tree().create_timer(0.001).timeout
+	Enlargen=1
 
 func AnimateX(delta):
 	while(scale.x>0.4 and moving):
@@ -126,9 +134,10 @@ func AnimateY(delta):
 		await get_tree().create_timer(0.001).timeout
 
 var damageTaken=false
+var index=Hearts.size()-1
 func AnimateDamage():
-	Hearts[Hearts.size()-1].queue_free()
-	Hearts.pop_back()
+	Hearts[index].hide()
+	index-=1
 	damageTaken=true
 	if(Enlargen==1 and SpeedUp==1):
 		while(damageTaken and modulate.g>0):
@@ -162,7 +171,6 @@ func _on_buff_timer_timeout() -> void:
 
 func _on_enlarge_timer_timeout() -> void:
 	EnlargenDownAnimate(get_process_delta_time())
-	Enlargen=1
 
 signal loss
 func YouLose():

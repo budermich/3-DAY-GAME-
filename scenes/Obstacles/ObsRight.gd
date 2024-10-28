@@ -22,5 +22,4 @@ func _process(delta):
 	position += dir*speed*delta
 
 func _on_timer_timeout() -> void:
-	print("DEATH")
-	queue_free()
+	get_parent().queue_free()
