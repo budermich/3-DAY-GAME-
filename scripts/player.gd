@@ -159,6 +159,7 @@ func AnimateScore():
 		modulate.r+=20.0/255.0
 		await get_tree().create_timer(0.01).timeout
 	polygon.color=InitColor
+	polygon.modulate=Color8(255,255,255,255)
 
 var buffed=false
 func _on_buff_timer_timeout() -> void:
