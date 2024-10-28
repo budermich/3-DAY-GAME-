@@ -190,6 +190,7 @@ position = Vector2(0, -64)
 scale = Vector2(2, 2)
 texture = ExtResource("6_1juvf")
 script = ExtResource("7_hyn6y")
+delay = 0.1
 
 [node name="Back" type="TextureButton" parent="CanvasLayer"]
 modulate = Color(1, 1, 1, 0)
@@ -202,7 +203,6 @@ texture_normal = ExtResource("8_u54t1")
 texture_pressed = ExtResource("9_4aanl")
 texture_hover = ExtResource("10_t3xbo")
 script = ExtResource("11_blb27")
-delay = 5.0
 
 [node name="Retry" type="TextureButton" parent="CanvasLayer"]
 modulate = Color(1, 1, 1, 0)
@@ -215,7 +215,7 @@ texture_normal = ExtResource("12_ultv6")
 texture_pressed = ExtResource("13_cpvnr")
 texture_hover = ExtResource("14_e182t")
 script = ExtResource("11_blb27")
-delay = 4.0
+delay = 1.0
 
 [node name="BgCover" type="Sprite2D" parent="CanvasLayer"]
 modulate = Color(1, 1, 1, 0)
