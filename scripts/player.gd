@@ -18,7 +18,7 @@ func _ready() -> void:
 	Hearts.append($"../Heart3")
 
 func _input(_event: InputEvent) -> void:
-	if Input.is_action_just_pressed("down") and !moving:
+	if Input.is_action_pressed("down")  and !moving:
 		var particleInstance=particles.instantiate()
 		wantedPosition=clamp(position.y+32,-320,320)
 		initPos=position.y
